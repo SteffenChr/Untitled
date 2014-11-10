@@ -18,6 +18,7 @@ public class BasicEnemyBehavior : MonoBehaviour {
 	private bool FloatAttacked = false;
 	private bool KnockedBack = false;
 	private float FloatingYPosition;
+	private NavMeshAgent agent;
 
 	public float Speed = 2.0F;
 	public float BackSpeed = 2.0F;
@@ -42,70 +43,71 @@ public class BasicEnemyBehavior : MonoBehaviour {
 	void Awake()
 	{
 		Player = GameObject.FindGameObjectWithTag("Player");
+		agent = GetComponent<NavMeshAgent>();
 		MyValue = SpawnEnemies.EnemyNumericValue;
 		MyWaveNumber = SpawnEnemies.WaveNumber;
 		NewHalt = Halt + MyWaveNumber - (SpawnEnemies.HaltModifier/HaltDivider);
 		NewAlmostHalt = Halt + MyWaveNumber + AlmostHalt - (SpawnEnemies.HaltModifier/HaltDivider);
-		//transform.position = new Vector3(transform.position.x,YPosition,transform.position.z);
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
+		agent.SetDestination(Player.transform.position);
 		//get different values based on when it enemy is spawned and how many are killed, used to determine how close enemy gets to player
 
-		float Dist = Vector3.Distance(Player.transform.position, transform.position);
-		NewHalt = Halt + MyWaveNumber - (SpawnEnemies.HaltModifier/HaltDivider);
-		NewAlmostHalt = Halt + MyWaveNumber + AlmostHalt - (SpawnEnemies.HaltModifier/HaltDivider);
-
-		if(Halt > NewHalt)
-		{
-			NewHalt = Halt;
-		}
-		//slow when close to player
-		if(Dist < ProximityToPlayer)
-			ForwardSpeed = ProxySpeed;
-		else
-			ForwardSpeed = Speed;
-
-		//move towards player
-		if( Dist > NewHalt && Stop == false && AttackedStop == false)
-		{
-			transform.LookAt(Player.transform);
-			transform.Translate (Vector3.forward * ForwardSpeed);
-		}
-
-		//back off if player gets too close
-		if(Dist < BackOff && AttackedStop == false)
-		{
-			transform.Translate (Vector3.back * BackSpeed);
-		}
-
-		//move to a random side if colliding with another enemy
-		if(CollideWithAlly == true && Dist > NewAlmostHalt && AttackedStop == false)
-		{
-			if(RandomDirection < 0.5)
-			{
-				transform.Translate (Vector3.right * SideSpeed);
-			}
-			else
-				transform.Translate (Vector3.left * SideSpeed);
-		}
-
-		if(FloatAttacked == true)
-		{
-			PrivateFloatSpeed = FloatUpSpeed;
-			transform.Translate(Vector3.up * PrivateFloatSpeed);
-
-			StartCoroutine(Floating());
-		}
-		else if(KnockedBack == true)
-		{
-			transform.Translate (Vector3.back * KnockbackSpeed);
-			transform.position = new Vector3(transform.position.x,FloatingYPosition,transform.position.z);
-		}
-		else
-			transform.position = new Vector3(transform.position.x,YPosition,transform.position.z);
+//		float Dist = Vector3.Distance(Player.transform.position, transform.position);
+//		NewHalt = Halt + MyWaveNumber - (SpawnEnemies.HaltModifier/HaltDivider);
+//		NewAlmostHalt = Halt + MyWaveNumber + AlmostHalt - (SpawnEnemies.HaltModifier/HaltDivider);
+//
+//		if(Halt > NewHalt)
+//		{
+//			NewHalt = Halt;
+//		}
+//		//slow when close to player
+//		if(Dist < ProximityToPlayer)
+//			ForwardSpeed = ProxySpeed;
+//		else
+//			ForwardSpeed = Speed;
+//
+//		//move towards player
+//		if( Dist > NewHalt && Stop == false && AttackedStop == false)
+//		{
+//			transform.LookAt(Player.transform);
+//			transform.Translate (Vector3.forward * ForwardSpeed);
+//		}
+//
+//		//back off if player gets too close
+//		if(Dist < BackOff && AttackedStop == false)
+//		{
+//			transform.Translate (Vector3.back * BackSpeed);
+//		}
+//
+//		//move to a random side if colliding with another enemy
+//		if(CollideWithAlly == true && Dist > NewAlmostHalt && AttackedStop == false)
+//		{
+//			if(RandomDirection < 0.5)
+//			{
+//				transform.Translate (Vector3.right * SideSpeed);
+//			}
+//			else
+//				transform.Translate (Vector3.left * SideSpeed);
+//		}
+//
+//		if(FloatAttacked == true)
+//		{
+//			PrivateFloatSpeed = FloatUpSpeed;
+//			transform.Translate(Vector3.up * PrivateFloatSpeed);
+//
+//			StartCoroutine(Floating());
+//		}
+//		else if(KnockedBack == true)
+//		{
+//			transform.Translate (Vector3.back * KnockbackSpeed);
+//			transform.position = new Vector3(transform.position.x,FloatingYPosition,transform.position.z);
+//		}
+//		else
+//			transform.position = new Vector3(transform.position.x,YPosition,transform.position.z);
 
 		//if(KnockedBack == false && FloatAttacked == false)
 			//transform.position = new Vector3(transform.position.x,YPosition,transform.position.z);
