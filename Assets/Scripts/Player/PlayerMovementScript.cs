@@ -68,28 +68,27 @@ public class PlayerMovementScript : MonoBehaviour
 			ActualSpeed = Speed;
 
 		//simple movement
-		if (Input.GetKey("w") && CanMove == true)
-		{
-			transform.Translate(Vector3.forward * ActualSpeed);
-		}
+		if(CanMove == true){
+			if (Input.GetKey("w"))
+			{
+				transform.Translate(Vector3.forward * ActualSpeed);
+			}
 
-		if (Input.GetKey("a") && CanMove == true)
-		{
-			transform.Translate(Vector3.left * ActualSpeed);
-		}
+			if (Input.GetKey("a"))
+			{
+				transform.Translate(Vector3.left * ActualSpeed);
+			}
 
-		if (Input.GetKey("s") && CanMove == true)
-		{
-			transform.Translate(Vector3.back * ActualSpeed);
-		}
+			if (Input.GetKey("s"))
+			{
+				transform.Translate(Vector3.back * ActualSpeed);
+			}
 
-		if (Input.GetKey("d") && CanMove == true)
-		{
-			transform.Translate(Vector3.right * ActualSpeed);
+			if (Input.GetKey("d"))
+			{
+				transform.Translate(Vector3.right * ActualSpeed);
+			}
 		}
-
-		//making sure you don't get double speed while moving diagonally
-	
 
 		if(AttackPoint.PlayerAttack03Float == true)
 		{
