@@ -38,9 +38,9 @@ public class AttackPoint : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		transform.position = PlayerPosition.position + new Vector3(0,0,AttackPointDistance);
-		transform.LookAt(PlayerPosition);
-		YPosition = transform.position.y;
+//		transform.position = PlayerPosition.position + new Vector3(0,0,AttackPointDistance);
+//		transform.LookAt(PlayerPosition);
+//		YPosition = transform.position.y;
 	}
 	
 	// Update is called once per frame
@@ -57,29 +57,29 @@ public class AttackPoint : MonoBehaviour {
 		}
 
 		//Attack direction
-		if (Input.GetKey("w") && CanMove)
-		{
-			transform.position = PlayerPosition.position + new Vector3(0,0,AttackPointDistance);
-			transform.LookAt(PlayerPosition);
-		}
-
-		if (Input.GetKey("s") && CanMove)
-		{
-			transform.position = PlayerPosition.position + new Vector3(0,0,-AttackPointDistance);
-			transform.LookAt(PlayerPosition);
-		}
-
-		if (Input.GetKey("a") && CanMove)
-		{
-			transform.position = PlayerPosition.position + new Vector3(-AttackPointDistance,0,0);
-			transform.LookAt(PlayerPosition);
-		}
-
-		if (Input.GetKey("d") && CanMove)
-		{
-			transform.position = PlayerPosition.position + new Vector3(AttackPointDistance,0,0);
-			transform.LookAt(PlayerPosition);
-		}
+//		if (Input.GetKey("w") && CanMove)
+//		{
+//			transform.position = PlayerPosition.position + new Vector3(0,0,AttackPointDistance);
+//			transform.LookAt(PlayerPosition);
+//		}
+//
+//		if (Input.GetKey("s") && CanMove)
+//		{
+//			transform.position = PlayerPosition.position + new Vector3(0,0,-AttackPointDistance);
+//			transform.LookAt(PlayerPosition);
+//		}
+//
+//		if (Input.GetKey("a") && CanMove)
+//		{
+//			transform.position = PlayerPosition.position + new Vector3(-AttackPointDistance,0,0);
+//			transform.LookAt(PlayerPosition);
+//		}
+//
+//		if (Input.GetKey("d") && CanMove)
+//		{
+//			transform.position = PlayerPosition.position + new Vector3(AttackPointDistance,0,0);
+//			transform.LookAt(PlayerPosition);
+//		}
 
 		//time between attacks before combo resets
 		if(Input.GetKeyDown(KeyCode.UpArrow))
