@@ -48,44 +48,47 @@ public class PlayerMovementScript : MonoBehaviour
 			CanMove = true;
 		}
 
-		if(Input.GetKey("d") && Input.GetKey("w"))
-		{
-			ActualSpeed = Speed/Division;
-		}
-		else if (Input.GetKey("w") && Input.GetKey("a"))
-		{
-			ActualSpeed = Speed/Division;
-		}
-		else if (Input.GetKey("a") && Input.GetKey("s"))
-		{
-			ActualSpeed = Speed/Division;
-		}
-		else if (Input.GetKey("s") && Input.GetKey("d"))
-		{
-			ActualSpeed = Speed/Division;
-		}
-		else
-			ActualSpeed = Speed;
-
-		//simple movement
-		if (Input.GetKey("w") && CanMove == true)
-		{
-			transform.Translate(Vector3.forward * ActualSpeed);
-		}
-
-		if (Input.GetKey("a") && CanMove == true)
-		{
-			transform.Translate(Vector3.left * ActualSpeed);
-		}
-
-		if (Input.GetKey("s") && CanMove == true)
-		{
-			transform.Translate(Vector3.back * ActualSpeed);
-		}
-
-		if (Input.GetKey("d") && CanMove == true)
-		{
-			transform.Translate(Vector3.right * ActualSpeed);
+		if(CanMove == true){
+			if(Input.GetKey("d") && Input.GetKey("w"))
+			{
+				transform.forward = new Vector3(1,0,1);
+				RunDiagonal();
+			}
+			else if (Input.GetKey("w") && Input.GetKey("a"))
+			{
+				transform.forward = new Vector3(-1,0,1);
+				RunDiagonal();
+			}
+			else if (Input.GetKey("a") && Input.GetKey("s"))
+			{
+				transform.forward = new Vector3(-1,0,-1);
+				RunDiagonal();
+			}
+			else if (Input.GetKey("s") && Input.GetKey("d"))
+			{
+				transform.forward = new Vector3(1,0,-1);
+				RunDiagonal();
+			}
+			else if (Input.GetKey("w"))
+			{
+				transform.forward = Vector3.forward;
+				RunStrait();
+			}
+			else if (Input.GetKey("s"))
+			{
+				transform.forward = Vector3.back;
+				RunStrait();
+			}
+			else if (Input.GetKey("a"))
+			{
+				transform.forward = Vector3.left;
+				RunStrait();
+			}
+			else if (Input.GetKey("d"))
+			{
+				transform.forward = Vector3.right;
+				RunStrait();
+			}
 		}
 
 		//making sure you don't get double speed while moving diagonally
@@ -97,6 +100,16 @@ public class PlayerMovementScript : MonoBehaviour
 			transform.Translate(Vector3.up * FloatUpSpeed);
 			StartCoroutine(Floating());
 		}
+	}
+
+	void RunStrait ()
+	{
+		transform.Translate(Vector3.forward * Speed);
+	}
+
+	void RunDiagonal ()
+	{
+		transform.Translate(Vector3.forward * (Speed/Division));
 	}
 
 	IEnumerator Floating()
