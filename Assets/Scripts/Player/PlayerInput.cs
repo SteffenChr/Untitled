@@ -14,6 +14,7 @@ public class PlayerInput : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		//ALL INPUT SHOULD USE THE INPUT FROM UNITY, NOT GetKey
 		if(Input.GetKey("d") && Input.GetKey("w"))
 		{
 			playerMovementScript.RunDiagonal(new Vector3(1,0,1));
