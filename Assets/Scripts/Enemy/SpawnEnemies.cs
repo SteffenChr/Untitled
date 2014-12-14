@@ -35,6 +35,10 @@ public class SpawnEnemies : MonoBehaviour {
 		}
 	}
 
+    /// <summary>
+    /// The methode spawns the enemy into the scene with a cooldown.
+    /// </summary>
+    /// <param name="SpawnTime">The cooldown until next spawn</param>
 	IEnumerator Spawn(float SpawnTime)
 	{
 		Instantiate (BasicEnemy, transform.position, transform.rotation);

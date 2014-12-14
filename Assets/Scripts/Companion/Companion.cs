@@ -13,6 +13,9 @@ public class Companion : Character {
 	public Companion(){
 	}
 
+    /// <summary>
+    /// What happens when the player is knocked out.
+    /// </summary>
 	public void KnockOut(){
 		
 	}

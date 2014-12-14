@@ -16,7 +16,6 @@ public class PlayerInput : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		//ALL INPUT SHOULD USE THE INPUT FROM UNITY, NOT GetKey
         //Player movement (use axis for joystick)
         if (Input.GetButton("Left") && Input.GetButton("Forward"))
 		{
