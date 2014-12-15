@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * Everything that has to do with the companions normal movement AI
+ */
 public class CompanionMovement : MonoBehaviour {
 
 	public Transform companionPoint;

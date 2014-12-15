@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Companion : Character {
+/*
+ * The companion class is used on all companions and contains the basic functionalities and attributes
+ */
+public class Companion {
 
+    public string name;
+    public int id;
+    public int life;
+    public float movementSpeed;
+
+    private bool canMove;
+    private bool isActive;
 	private Vector3 companionDestination;
-	private Character character;
-
-	public Companion(string name, int id, int life, float movementSpeed, bool canMove){
-		character = new Character(name, id, life, movementSpeed, canMove);
-	}
-
-	public Companion(){
-	}
 
     /// <summary>
     /// What happens when the player is knocked out.
@@ -21,4 +23,6 @@ public class Companion : Character {
 	}
 
 	public Vector3 CompanionDestination{ get; set; }
+    public bool CanMove { get; set; }
+    public bool IsActive { get; set; }
 }

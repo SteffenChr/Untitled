@@ -10,7 +10,7 @@ public class PlayerMovementScript : MonoBehaviour
 	public float Speed = 5.0F;
 	public float FloatUpSpeed = 2.0F;
 	public float FloatDuration = 2.0F;
-	public float Division = 2.0F;
+	public float Division = 0.5F; //This is a procentage which defines how fast it should move diagonaly compared to normal speed
 
 	// Use this for initialization
 	void Start () 
@@ -68,14 +68,13 @@ public class PlayerMovementScript : MonoBehaviour
 	{
 		if(CanMove){
 			transform.forward = direction;
-			transform.Translate(Vector3.forward * (Speed/Division));
+			transform.Translate(Vector3.forward * (Speed*Division));
 		}
 	}
 
 	IEnumerator Floating()
 	{
 		yield return new WaitForSeconds (FloatDuration);
-		//PrivateFloatSpeed = 0;
 		transform.position = new Vector3(transform.position.x,YPosition,transform.position.z);
 	}
 }
