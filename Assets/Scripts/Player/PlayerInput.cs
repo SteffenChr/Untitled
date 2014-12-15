@@ -69,14 +69,14 @@ public class PlayerInput : MonoBehaviour
         //Left companion attack
         if (Input.GetButton("Companion1Attack"))
         {
-            if (isCompanionSpotEmpty(Enumscript.CompanionPosition.Left))
+            if (isCompanionSpotEmpty(CompanionPosition.Left))
             {
-                GetCompanion(Enumscript.CompanionPosition.Left);
+                GetCompanion(CompanionPosition.Left);
             }
 
-            if (activeCompanions[(int)Enumscript.CompanionPosition.Left] != null)
+            if (activeCompanions[(int)CompanionPosition.Left] != null)
             {
-                activeCompanions[(int)Enumscript.CompanionPosition.Left].SendMessage("Attack");
+                activeCompanions[(int)CompanionPosition.Left].SendMessage("Attack");
             }
 
             
@@ -86,14 +86,14 @@ public class PlayerInput : MonoBehaviour
         //Right companion attack
         if (Input.GetButton("Companion2Attack"))
         {
-            if (isCompanionSpotEmpty(Enumscript.CompanionPosition.Right))
+            if (isCompanionSpotEmpty(CompanionPosition.Right))
             {
-                GetCompanion(Enumscript.CompanionPosition.Right);
+                GetCompanion(CompanionPosition.Right);
             }
 
-            if (activeCompanions[(int)Enumscript.CompanionPosition.Right] != null)
+            if (activeCompanions[(int)CompanionPosition.Right] != null)
             {
-                activeCompanions[(int)Enumscript.CompanionPosition.Right].SendMessage("Attack");
+                activeCompanions[(int)CompanionPosition.Right].SendMessage("Attack");
             }
         }
 
@@ -104,7 +104,7 @@ public class PlayerInput : MonoBehaviour
     /// 
     /// </summary>
     /// <param name="position">the position of the companion. 1=left, 2=right</param>
-    private void GetCompanion(Enumscript.CompanionPosition position)
+    private void GetCompanion(CompanionPosition position)
     {
         Companion companion = companionDB.GetCompanion((int)position);
         if (companion != null)
@@ -123,9 +123,9 @@ public class PlayerInput : MonoBehaviour
     /// <summary>
     /// Used to see if positions in the activeCompanions list is empty
     /// </summary>
-    /// <param name="position">The companion spot that needs to tjecked 1=left, 2=right</param>
+    /// <param name="companionPosition">The companion spot that needs to tjecked 1=left, 2=right</param>
     /// <returns>True == null | False != null</returns>
-    private bool isCompanionSpotEmpty(Enumscript.CompanionPosition companionPosition)
+    private bool isCompanionSpotEmpty(CompanionPosition companionPosition)
     {
         if (activeCompanions[(int)companionPosition] == null)
             return true;
