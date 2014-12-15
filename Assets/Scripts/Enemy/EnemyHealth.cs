@@ -23,22 +23,7 @@ public class EnemyHealth : MonoBehaviour {
 	{
 		if(collider.CompareTag("DealEnemyDamage"))
 		{
-			Health = Health - PlayerAttack01Damage; //this amount should come from the collider, and not being set in this script.
-		}
-		
-		if(collider.CompareTag("PlayerAttack02"))
-		{
-			Health = Health - PlayerAttack02Damage;
-		}
-		
-		if(collider.CompareTag("PlayerAttack03"))
-		{
-			Health = Health - PlayerAttack03Damage;
-		}
-
-		if(collider.CompareTag("PlayerAttack04"))
-		{
-			Health = Health - collider.GetComponent<DamageDealing>().damageDealing;
+            Health = Health - collider.GetComponent<DamageDealing>().damageDealing;
 		}
 	}
 }

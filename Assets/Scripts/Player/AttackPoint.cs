@@ -50,6 +50,7 @@ public class AttackPoint : MonoBehaviour {
 		}
 		else
 		{
+            YPosition = GameObject.FindGameObjectWithTag("Player").transform.position.y - 0.2F;
 			CanMove = true;
 		}
 

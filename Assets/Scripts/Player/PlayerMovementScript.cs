@@ -15,7 +15,6 @@ public class PlayerMovementScript : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		YPosition = transform.position.y;
 	}
 	
 	// Update is called once per frame
@@ -50,7 +49,9 @@ public class PlayerMovementScript : MonoBehaviour
 
 		if(AttackPoint.PlayerAttack03Float == true)
 		{
-			//PrivateFloatSpeed = FloatUpSpeed;
+            //PrivateFloatSpeed = FloatUpSpeed;
+            YPosition = transform.position.y;
+            this.rigidbody.useGravity = false;
 			transform.Translate(Vector3.up * FloatUpSpeed);
 			StartCoroutine(Floating());
 		}
@@ -76,5 +77,6 @@ public class PlayerMovementScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds (FloatDuration);
 		transform.position = new Vector3(transform.position.x,YPosition,transform.position.z);
+        this.rigidbody.useGravity = true;
 	}
 }
