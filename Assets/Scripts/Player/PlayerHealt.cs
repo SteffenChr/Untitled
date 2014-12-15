@@ -6,6 +6,22 @@ public class PlayerHealt : MonoBehaviour
     private int currentPlayerHealt;
     private static int maxPlayerHealt;
 
+    void Update()
+    {
+        if(CurrentPlayerHealt <= 0){
+            PlayerIsDead();
+        }
+    }
+
+    /// <summary>
+    /// This methode is called when the players life is less than or equal to zero
+    /// </summary>
+    private void PlayerIsDead()
+    {
+        print("You are dead :-(  Life restored to 10");
+        CurrentPlayerHealt = 10;
+    }
+
     /// <summary>
     /// This handles what will happen on collision enter with the healt of the player.
     /// </summary>
