@@ -51,8 +51,10 @@
      <Compile Include="Assets\Scripts\Camera\MainCamera.cs" />
      <Compile Include="Assets\Scripts\Classes\Character.cs" />
      <Compile Include="Assets\Scripts\Companion\Companion.cs" />
+     <Compile Include="Assets\Scripts\Companion\CompanionAttack.cs" />
      <Compile Include="Assets\Scripts\Companion\CompanionDatabase.cs" />
      <Compile Include="Assets\Scripts\Companion\CompanionMovement.cs" />
+     <Compile Include="Assets\Scripts\Companion\HG1Attack.cs" />
      <Compile Include="Assets\Scripts\Companion\HammerGirl.cs" />
      <Compile Include="Assets\Scripts\Enemy\BasicEnemyBehavior.cs" />
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
