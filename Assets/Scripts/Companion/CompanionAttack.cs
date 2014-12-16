@@ -3,16 +3,39 @@ using System.Collections;
 
 public class CompanionAttack : MonoBehaviour {
 
-    public int damageDealing = 0;
-    public Transform transform;
+    public float damageDealing;
+    public float attackCooldown;
+    public Transform attackTransform;
+    public float cooldownTimeUntilNextAttack;
+    public int attackNumber;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    private bool isAttackUsable = true;
+    private GameObject attackPoint;
+
+    void Start()
+    {
+        attackPoint = GameObject.FindGameObjectWithTag("AttackPoint");
+    }
+
+    void Update()
+    {
+        
+    }
+
+    private void InstantiateAttack(Transform attackTransform)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void CooldownAttack(float attackCooldown)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void WaitUntilNextAttack(float cooldown)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool IsAttackUsable { get; set; }
 }

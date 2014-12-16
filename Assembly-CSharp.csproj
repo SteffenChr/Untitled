@@ -55,7 +55,6 @@
      <Compile Include="Assets\Scripts\Companion\CompanionDatabase.cs" />
      <Compile Include="Assets\Scripts\Companion\CompanionMovement.cs" />
      <Compile Include="Assets\Scripts\Companion\HammerGirl\HG1Attack.cs" />
-     <Compile Include="Assets\Scripts\Companion\HammerGirl\HammerGirl.cs" />
      <Compile Include="Assets\Scripts\Enemy\BasicEnemyBehavior.cs" />
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
