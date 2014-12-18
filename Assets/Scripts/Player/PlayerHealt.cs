@@ -19,7 +19,7 @@ public class PlayerHealt : MonoBehaviour
     private void PlayerIsDead()
     {
         print("You are dead :-(  Life restored to 10");
-        CurrentPlayerHealt = 10;
+        CurrentPlayerHealt = 8;
     }
 
     /// <summary>
@@ -31,6 +31,7 @@ public class PlayerHealt : MonoBehaviour
         if (coll.transform.CompareTag("Enemy"))
         {
             ReducePlayerHealt(1);
+            SetPlayerHealt();
         }
     }
 
@@ -57,6 +58,7 @@ public class PlayerHealt : MonoBehaviour
         {
             CurrentPlayerHealt = MaxPlayerHealt;
         }
+        SetPlayerHealt();
     }
 
     /// <summary>
@@ -67,6 +69,25 @@ public class PlayerHealt : MonoBehaviour
     private bool ExceedsMaxPlayerHealt(int amount)
     {
         return (CurrentPlayerHealt + amount) > MaxPlayerHealt ? true : false;
+    }
+
+    private void SetPlayerHealt()
+    {
+        float floatAmount = CalculateCurrentHealt();
+        ChangePlayerUI(floatAmount);
+    }
+
+    private void ChangePlayerUI(float floatAmount)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private float CalculateCurrentHealt()
+    {
+
+        //if(life)
+        //float floatLife = life / 4;
+        return 0F;
     }
 
     public int CurrentPlayerHealt { get; set; }
