@@ -7,6 +7,8 @@ using System.Collections;
  */
 public class Enemy : MonoBehaviour {
 
+    public int damageDealing;
+
 	// Use this for initialization
 	void Start () {
 	

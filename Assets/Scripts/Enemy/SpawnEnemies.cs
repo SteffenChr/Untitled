@@ -13,7 +13,7 @@ public class SpawnEnemies : MonoBehaviour {
 	public static int WaveNumber = 0;
 	public static int HaltModifier;
 	public float SpawnTime = 5.0F;
-	public Transform BasicEnemy;
+	public GameObject BasicEnemy;
 	public int StartCount = 0;
 	public int SpawnAmount = 10;
 	public int SpawnPointNumber = 0;
@@ -40,8 +40,10 @@ public class SpawnEnemies : MonoBehaviour {
     /// </summary>
     /// <param name="SpawnTime">The cooldown until next spawn</param>
 	IEnumerator Spawn(float SpawnTime)
-	{
-		Instantiate (BasicEnemy, transform.position, transform.rotation);
+	{        
+		GameObject enemy = Instantiate (BasicEnemy, transform.position, transform.rotation) as GameObject;
+        Transform parent = GameObject.FindGameObjectWithTag("EnemyHolder").transform;
+        enemy.transform.SetParent(parent, true);
 		Spawned = true;
 		PrivateSpawn = true;
 		yield return new WaitForSeconds (SpawnTime);

@@ -3,8 +3,16 @@ using System.Collections;
 
 public class PlayerHealt : MonoBehaviour
 {
+    public GameObject prefabHeart;
+
     private int currentPlayerHealt;
     private static int maxPlayerHealt;
+
+    void Start()
+    {
+        CurrentPlayerHealt = 8;
+        SetPlayerHealt();
+    }
 
     void Update()
     {
@@ -19,7 +27,8 @@ public class PlayerHealt : MonoBehaviour
     private void PlayerIsDead()
     {
         print("You are dead :-(  Life restored to 10");
-        CurrentPlayerHealt = 8;
+        CurrentPlayerHealt = 10;
+        SetPlayerHealt();
     }
 
     /// <summary>
@@ -28,9 +37,11 @@ public class PlayerHealt : MonoBehaviour
     /// <param name="coll"></param>
     void OnCollisionEnter(Collision coll)
     {
+        print("Touch player");
         if (coll.transform.CompareTag("Enemy"))
         {
-            ReducePlayerHealt(1);
+            int enemyDamage = coll.gameObject.GetComponent<Enemy>().damageDealing;
+            ReducePlayerHealt(enemyDamage);
             SetPlayerHealt();
         }
     }
@@ -71,20 +82,63 @@ public class PlayerHealt : MonoBehaviour
         return (CurrentPlayerHealt + amount) > MaxPlayerHealt ? true : false;
     }
 
+    /// <summary>
+    /// Makes sure that the player healt UI is correct
+    /// </summary>
     private void SetPlayerHealt()
     {
-        float floatAmount = CalculateCurrentHealt();
-        ChangePlayerUI(floatAmount);
+        //float floatAmount = CalculateCurrentHealt();
+        ChangePlayerUI(CurrentPlayerHealt);
     }
 
-    private void ChangePlayerUI(float floatAmount)
+    /// <summary>
+    /// Sets the hearts in the player UI, 1 heart per life
+    /// </summary>
+    private void ChangePlayerUI(int life)
     {
-        throw new System.NotImplementedException();
+        GameObject playerUI = GameObject.FindGameObjectWithTag("PlayerUI");
+        GameObject[] hearts = GameObject.FindGameObjectsWithTag("PlayerHeart");
+
+        DeleteAllInArray(hearts);
+
+        for (int i = 0; i < life; i++)
+        {
+            InstantiateAndSetParent(prefabHeart, playerUI);
+        }
     }
 
+    /// <summary>
+    /// Delets the items in the array from the scene
+    /// </summary>
+    /// <param name="arrayList">The arraylist of items that needs to be deleted from the scene</param>
+    private void DeleteAllInArray(GameObject[] arrayList)
+    {
+        foreach (GameObject arrayItem in arrayList)
+        {
+            Destroy(arrayItem);
+        }
+    }
+
+    /// <summary>
+    /// This functions instantiates a prefab and sets the prefabs parent object
+    /// </summary>
+    /// <param name="prefab">The prefab to be instantiated</param>
+    /// <param name="parent">The parent of the new instance gameobject</param>
+    /// <returns>The instantiated gameobejct</returns>
+    private GameObject InstantiateAndSetParent(GameObject prefab, GameObject parent)
+    {
+        GameObject newInstance = Instantiate(prefab) as GameObject;
+        newInstance.transform.SetParent(parent.transform, false);
+        return newInstance;
+    }
+
+    /// <summary>
+    /// This methode calculates the player int healt into float
+    /// </summary>
+    /// <returns>the life value in float</returns>
     private float CalculateCurrentHealt()
     {
-
+        //CurrentPlayerHealt as
         //if(life)
         //float floatLife = life / 4;
         return 0F;
