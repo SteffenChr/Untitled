@@ -55,19 +55,19 @@ public class PlayerInput : MonoBehaviour
 		}
 
         //Player attack
-        if (Input.GetButton("PlayerAttack"))
+        if (Input.GetButtonDown("PlayerAttack"))
         {
             attManagement.PlayerAttack();
         }
 
         //Left companion attack
-        if (Input.GetButton("Companion1Attack"))
+        if (Input.GetButtonDown("Companion1Attack"))
         {
             attManagement.CompanionLeftAttack();
         }
 
         //Right companion attack
-        if (Input.GetButton("Companion2Attack"))
+        if (Input.GetButtonDown("Companion2Attack"))
         {
             attManagement.CompanionRightAttack();
         }

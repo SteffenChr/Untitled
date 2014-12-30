@@ -3,11 +3,11 @@ using System.Collections;
 
 public class AttackPoint : MonoBehaviour {
 
-	private bool PlayerAttack01Activated = false;
-	private bool PlayerAttack02Activated = true;
-	private bool PlayerAttack03Activated = true;
-	private bool CanMove = true;
-	private float YPosition;
+    private bool PlayerAttack01Activated = false;
+    private bool PlayerAttack02Activated = true;
+    private bool PlayerAttack03Activated = true;
+    private bool CanMove = true;
+    private float YPosition;
     private int TimeStamp;
 
 	public Transform PlayerPosition;
@@ -27,7 +27,7 @@ public class AttackPoint : MonoBehaviour {
 	public float FloatUpSpeed = 2.0F;
 	public float FloatDuration = 2.0F;
 
-	public static bool PlayerAttackDestoy = false;
+    public static bool PlayerAttackDestoy = false;
 	public static bool PlayerAttack01Immobalize = false;
 	public static bool PlayerAttack02Immobalize = false;
 	public static bool PlayerAttack03Immobalize = false;
@@ -64,9 +64,6 @@ public class AttackPoint : MonoBehaviour {
 
     public void PlayerAttacks()
     {
-        //time between attacks before combo resets
-        StartCoroutine(Combo(ComboTime));
-
         //Attack with combo
         if (!PlayerAttack01Activated)
         {
@@ -172,10 +169,5 @@ public class AttackPoint : MonoBehaviour {
     internal void PlayerAttacks(int attackNumber)
     {
         throw new System.NotImplementedException();
-    }
-
-    public void InstantiateAttack(Transform attackTransform)
-    {
-        print("Create transform");
     }
 }

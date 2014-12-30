@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AttackManagement : MonoBehaviour {
 
-    private AttackPoint attackPoint;
+    private PlayerAttack playerAttack;
     private CompanionDatabase companionDB;
     private GameObject[] activeCompanions;
 
@@ -14,7 +14,7 @@ public class AttackManagement : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
-        attackPoint = this.GetComponentInChildren<AttackPoint>();
+        playerAttack = this.GetComponent<PlayerAttack>();
         GameObject scripts = GameObject.FindGameObjectWithTag("Scripts");
         companionDB = scripts.GetComponent<CompanionDatabase>();
         GetCompanions();
@@ -27,7 +27,7 @@ public class AttackManagement : MonoBehaviour {
     internal void PlayerAttack()
     {
         StartCombo();
-        attackPoint.PlayerAttacks(attackNumber);
+        playerAttack.PlayerAttacks(attackNumber);
         IncreaseAttackNumber();
     }
 

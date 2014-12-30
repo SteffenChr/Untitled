@@ -10,11 +10,12 @@ public class CompanionAttack : MonoBehaviour {
     public int attackNumber; //The number of the attack in the combo
 
     private bool isAttackUsable = true;
-    private AttackPoint attackPoint;
+    private GameObject attackPoint;
+    private Object instantiatedAttackObject;
 
     void Start()
     {
-        attackPoint = GameObject.FindGameObjectWithTag("AttackPoint").GetComponent<AttackPoint>();
+        attackPoint = GameObject.FindGameObjectWithTag("AttackPoint");
     }
 
     void Update()
@@ -23,11 +24,11 @@ public class CompanionAttack : MonoBehaviour {
     }
 
     /// <summary>
-    /// Instantiates the transform used in the attack
+    /// Instantiates the transform used in the attack, in the position of the attackPoint
     /// </summary>
     public void InstantiateAttack()
     {
-        attackPoint.InstantiateAttack(transform);
+        instantiatedAttackObject = Instantiate(attackTransform, attackPoint.transform.position, attackPoint.transform.rotation);
     }
 
     private void CooldownAttack(float attackCooldown)
