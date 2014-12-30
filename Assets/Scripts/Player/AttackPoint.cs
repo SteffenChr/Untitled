@@ -8,8 +8,8 @@ public class AttackPoint : MonoBehaviour {
 	private bool PlayerAttack03Activated = true;
 	private bool CanMove = true;
 	private float YPosition;
+    private int TimeStamp;
 
-	private int TimeStamp;
 	public Transform PlayerPosition;
 	public Transform PlayerAttack01;
 	public Transform PlayerAttack02;
@@ -54,12 +54,6 @@ public class AttackPoint : MonoBehaviour {
 			CanMove = true;
 		}
 
-		//time between attacks before combo resets
-		if(Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			StartCoroutine(Combo(ComboTime));
-		}
-
 		if(PlayerAttack03Float == true)
 		{
 			//PrivateFloatSpeed = FloatUpSpeed;
@@ -70,6 +64,9 @@ public class AttackPoint : MonoBehaviour {
 
     public void PlayerAttacks()
     {
+        //time between attacks before combo resets
+        StartCoroutine(Combo(ComboTime));
+
         //Attack with combo
         if (!PlayerAttack01Activated)
         {
@@ -171,4 +168,14 @@ public class AttackPoint : MonoBehaviour {
 		PlayerAttack03Immobalize = false;
 		PlayerAttack01Activated = false;
 	}
+
+    internal void PlayerAttacks(int attackNumber)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void InstantiateAttack(Transform attackTransform)
+    {
+        print("Create transform");
+    }
 }

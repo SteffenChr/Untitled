@@ -3,18 +3,18 @@ using System.Collections;
 
 public class CompanionAttack : MonoBehaviour {
 
-    public float damageDealing;
-    public float attackCooldown;
-    public Transform attackTransform;
-    public float cooldownTimeUntilNextAttack;
-    public int attackNumber;
+    public float damageDealing; //The damage the attack inflicts on the enemy
+    public float attackCooldown; //The cooldown before the attack can be used again
+    public Transform attackTransform; //The transform used in the attack
+    public float cooldownTimeUntilNextAttack; //The length of the animation
+    public int attackNumber; //The number of the attack in the combo
 
     private bool isAttackUsable = true;
-    private GameObject attackPoint;
+    private AttackPoint attackPoint;
 
     void Start()
     {
-        attackPoint = GameObject.FindGameObjectWithTag("AttackPoint");
+        attackPoint = GameObject.FindGameObjectWithTag("AttackPoint").GetComponent<AttackPoint>();
     }
 
     void Update()
@@ -22,9 +22,12 @@ public class CompanionAttack : MonoBehaviour {
         
     }
 
-    private void InstantiateAttack(Transform attackTransform)
+    /// <summary>
+    /// Instantiates the transform used in the attack
+    /// </summary>
+    public void InstantiateAttack()
     {
-        throw new System.NotImplementedException();
+        attackPoint.InstantiateAttack(transform);
     }
 
     private void CooldownAttack(float attackCooldown)
@@ -35,6 +38,18 @@ public class CompanionAttack : MonoBehaviour {
     private void WaitUntilNextAttack(float cooldown)
     {
         throw new System.NotImplementedException();
+    }
+
+    /// <summary>
+    /// This methode determinds if the attack is the same as the order
+    /// </summary>
+    /// <param name="attackNum">The number of the attack in the combo</param>
+    public virtual void Attack(int attackNum)
+    {
+        if (attackNum.Equals(attackNumber))
+        {
+            InstantiateAttack();
+        }
     }
 
     public bool IsAttackUsable { get; set; }

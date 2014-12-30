@@ -12,4 +12,8 @@ public class PlayerAttack : MonoBehaviour {
 	void Update () {
 	
 	}
+        internal void PlayerAttacks(int attackNumber)
+    {
+        
+    }
 }

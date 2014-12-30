@@ -7,21 +7,15 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerInput : MonoBehaviour
 {
-	private PlayerMovementScript playerMovementScript;
-    private AttackPoint attackPoint;
-    private CompanionDatabase companionDB;
-
-    private GameObject[] activeCompanions;
+    private PlayerMovementScript playerMovementScript;
+    private AttackManagement attManagement;
 
 	// Use this for initialization
 	void Start ()
 	{
 		playerMovementScript = this.GetComponent<PlayerMovementScript>();
-        attackPoint = this.GetComponentInChildren<AttackPoint>();
-        GameObject scripts = GameObject.FindGameObjectWithTag("Scripts");
-        companionDB = scripts.GetComponent<CompanionDatabase>();
+        attManagement = this.GetComponent<AttackManagement>();
         
-        getCompanions();
 	}
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -63,83 +57,20 @@ public class PlayerInput : MonoBehaviour
         //Player attack
         if (Input.GetButton("PlayerAttack"))
         {
-            attackPoint.PlayerAttacks();
+            attManagement.PlayerAttack();
         }
 
         //Left companion attack
         if (Input.GetButton("Companion1Attack"))
         {
-            if (isCompanionSpotEmpty(CompanionPosition.Left))
-            {
-                GetCompanion(CompanionPosition.Left);
-            }
-
-            if (activeCompanions[(int)CompanionPosition.Left] != null)
-            {
-                activeCompanions[(int)CompanionPosition.Left].SendMessage("Attack");
-            }
-
-            
-
+            attManagement.CompanionLeftAttack();
         }
 
         //Right companion attack
         if (Input.GetButton("Companion2Attack"))
         {
-            if (isCompanionSpotEmpty(CompanionPosition.Right))
-            {
-                GetCompanion(CompanionPosition.Right);
-            }
-
-            if (activeCompanions[(int)CompanionPosition.Right] != null)
-            {
-                activeCompanions[(int)CompanionPosition.Right].SendMessage("Attack");
-            }
+            attManagement.CompanionRightAttack();
         }
-
-        
 	}
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="position">the position of the companion. 1=left, 2=right</param>
-    private void GetCompanion(CompanionPosition position)
-    {
-        Companion companion = companionDB.GetCompanion((int)position);
-        if (companion != null)
-        {
-            GameObject[] companions = GameObject.FindGameObjectsWithTag("Companion");
-            foreach (GameObject obj in companions)
-            {
-                if (obj.name.Equals(companion.name))
-                {
-                    activeCompanions[(int)position] = obj;
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Used to see if positions in the activeCompanions list is empty
-    /// </summary>
-    /// <param name="companionPosition">The companion spot that needs to tjecked 1=left, 2=right</param>
-    /// <returns>True == null | False != null</returns>
-    private bool isCompanionSpotEmpty(CompanionPosition companionPosition)
-    {
-        if (activeCompanions[(int)companionPosition] == null)
-            return true;
-        else
-            return false;
-    }
-
-    /// <summary>
-    /// Used to get all the active companions in the scene view
-    /// </summary>
-    private void getCompanions()
-    {
-        activeCompanions = GameObject.FindGameObjectsWithTag("Companion");
-    }
-
 }
 
