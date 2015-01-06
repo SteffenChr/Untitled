@@ -3,13 +3,13 @@ using System.Collections;
 
 public class AttackPoint : MonoBehaviour {
 
-	private bool PlayerAttack01Activated = false;
-	private bool PlayerAttack02Activated = true;
-	private bool PlayerAttack03Activated = true;
-	private bool CanMove = true;
-	private float YPosition;
+    private bool PlayerAttack01Activated = false;
+    private bool PlayerAttack02Activated = true;
+    private bool PlayerAttack03Activated = true;
+    private bool CanMove = true;
+    private float YPosition;
+    private int TimeStamp;
 
-	private int TimeStamp;
 	public Transform PlayerPosition;
 	public Transform PlayerAttack01;
 	public Transform PlayerAttack02;
@@ -27,7 +27,7 @@ public class AttackPoint : MonoBehaviour {
 	public float FloatUpSpeed = 2.0F;
 	public float FloatDuration = 2.0F;
 
-	public static bool PlayerAttackDestoy = false;
+    public static bool PlayerAttackDestoy = false;
 	public static bool PlayerAttack01Immobalize = false;
 	public static bool PlayerAttack02Immobalize = false;
 	public static bool PlayerAttack03Immobalize = false;
@@ -38,9 +38,6 @@ public class AttackPoint : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-//		transform.position = PlayerPosition.position + new Vector3(0,0,AttackPointDistance);
-//		transform.LookAt(PlayerPosition);
-//		YPosition = transform.position.y;
 	}
 	
 	// Update is called once per frame
@@ -53,68 +50,8 @@ public class AttackPoint : MonoBehaviour {
 		}
 		else
 		{
+            YPosition = GameObject.FindGameObjectWithTag("Player").transform.position.y - 0.2F;
 			CanMove = true;
-		}
-
-		//Attack direction
-//		if (Input.GetKey("w") && CanMove)
-//		{
-//			transform.position = PlayerPosition.position + new Vector3(0,0,AttackPointDistance);
-//			transform.LookAt(PlayerPosition);
-//		}
-//
-//		if (Input.GetKey("s") && CanMove)
-//		{
-//			transform.position = PlayerPosition.position + new Vector3(0,0,-AttackPointDistance);
-//			transform.LookAt(PlayerPosition);
-//		}
-//
-//		if (Input.GetKey("a") && CanMove)
-//		{
-//			transform.position = PlayerPosition.position + new Vector3(-AttackPointDistance,0,0);
-//			transform.LookAt(PlayerPosition);
-//		}
-//
-//		if (Input.GetKey("d") && CanMove)
-//		{
-//			transform.position = PlayerPosition.position + new Vector3(AttackPointDistance,0,0);
-//			transform.LookAt(PlayerPosition);
-//		}
-
-		//time between attacks before combo resets
-		if(Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			StartCoroutine(Combo(ComboTime));
-		}
-
-		//Attack with combo
-		if(Input.GetKeyDown(KeyCode.UpArrow) && !PlayerAttack01Activated)
-		{
-			PlayerAttackDestoy = false;
-			Instantiate(PlayerAttack01, transform.position, transform.rotation);
-			PlayerAttack01Activated = true;
-			PlayerAttack01Immobalize = true;
-			StartCoroutine (CooldownPlayerAttack01());
-
-		}
-
-		if(Input.GetKeyDown(KeyCode.UpArrow) && !PlayerAttack02Activated)
-		{
-			PlayerAttackDestoy = false;
-			Instantiate(PlayerAttack02, transform.position, transform.rotation);
-			PlayerAttack02Activated = true;
-			PlayerAttack02Immobalize = true;
-			StartCoroutine (CooldownPlayerAttack02());
-		}
-
-		if(Input.GetKeyDown(KeyCode.UpArrow) && !PlayerAttack03Activated)
-		{
-			PlayerAttackDestoy = false;
-			Instantiate(PlayerAttack03, transform.position, transform.rotation);
-			PlayerAttack03Activated = true;
-			PlayerAttack03Immobalize = true;
-			PlayerAttack03Float = true;
-			StartCoroutine (CooldownPlayerAttack03());
 		}
 
 		if(PlayerAttack03Float == true)
@@ -125,8 +62,38 @@ public class AttackPoint : MonoBehaviour {
 		}
 	}
 
+    public void PlayerAttacks()
+    {
+        //Attack with combo
+        if (!PlayerAttack01Activated)
+        {
+            PlayerAttackDestoy = false;
+            Instantiate(PlayerAttack01, transform.position, transform.rotation);
+            PlayerAttack01Activated = true;
+            PlayerAttack01Immobalize = true;
+            StartCoroutine(CooldownPlayerAttack01());
 
+        }
 
+        if (!PlayerAttack02Activated)
+        {
+            PlayerAttackDestoy = false;
+            Instantiate(PlayerAttack02, transform.position, transform.rotation);
+            PlayerAttack02Activated = true;
+            PlayerAttack02Immobalize = true;
+            StartCoroutine(CooldownPlayerAttack02());
+        }
+
+        if (!PlayerAttack03Activated)
+        {
+            PlayerAttackDestoy = false;
+            Instantiate(PlayerAttack03, transform.position, transform.rotation);
+            PlayerAttack03Activated = true;
+            PlayerAttack03Immobalize = true;
+            PlayerAttack03Float = true;
+            StartCoroutine(CooldownPlayerAttack03());
+        }
+    }
 
 	IEnumerator Floating()
 	{
@@ -198,4 +165,9 @@ public class AttackPoint : MonoBehaviour {
 		PlayerAttack03Immobalize = false;
 		PlayerAttack01Activated = false;
 	}
+
+    internal void PlayerAttacks(int attackNumber)
+    {
+        throw new System.NotImplementedException();
+    }
 }

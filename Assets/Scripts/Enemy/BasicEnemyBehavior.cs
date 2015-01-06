@@ -56,6 +56,10 @@ public class BasicEnemyBehavior : MonoBehaviour {
 		agent.SetDestination(Player.transform.position);
 		//get different values based on when it enemy is spawned and how many are killed, used to determine how close enemy gets to player
 
+        if (AttackedStop || Stop)
+        {
+            agent.Stop();
+        }
 //		float Dist = Vector3.Distance(Player.transform.position, transform.position);
 //		NewHalt = Halt + MyWaveNumber - (SpawnEnemies.HaltModifier/HaltDivider);
 //		NewAlmostHalt = Halt + MyWaveNumber + AlmostHalt - (SpawnEnemies.HaltModifier/HaltDivider);
@@ -116,25 +120,26 @@ public class BasicEnemyBehavior : MonoBehaviour {
 	//triggers to determine what happens when colliding with other objects
 	void OnTriggerEnter(Collider collider)
 	{
-		if(collider.CompareTag("PlayerAttack01"))
+        print(collider.name);
+		if(collider.name.Equals("PlayerAttack01(Clone)"))
 		{
 			StartCoroutine(AttackedStopForward());
 			StartCoroutine(ShakeLeftRight());
 		}
-		
-		if(collider.CompareTag("PlayerAttack02"))
+
+        if (collider.name.Equals("PlayerAttack02(Clone)"))
 		{
 			StartCoroutine(AttackedStopForward());
 			StartCoroutine(ShakeLeftRight());
 		}
-		
-		if(collider.CompareTag("PlayerAttack03"))
+
+        if (collider.name.Equals("PlayerAttack03(Clone)"))
 		{
 			StartCoroutine (FloatingAttackedStopForward());
 			FloatAttacked = true;
 		}
 
-		if(collider.CompareTag("PlayerAttack04"))
+        if (collider.name.Equals("PlayerAttack04(Clone)"))
 		{
 			FloatingYPosition = transform.position.y;
 			StartCoroutine(Knockback());
@@ -187,21 +192,28 @@ public class BasicEnemyBehavior : MonoBehaviour {
 	{
 		Stop = true;
 		yield return new WaitForSeconds (ForwardStop);
-		Stop = false;
+        StartAgent();
 	}
+
+    private void StartAgent()
+    {
+        AttackedStop = false;
+        Stop = false;
+        agent.Resume();
+    }
 
 	IEnumerator AttackedStopForward()
 	{
 		AttackedStop = true;
 		yield return new WaitForSeconds (AttackedForwardStop);
-		AttackedStop = false;
+        StartAgent();
 	}
 
 	IEnumerator FloatingAttackedStopForward()
 	{
 		AttackedStop = true;
 		yield return new WaitForSeconds (FloatingAttackForwardStop);
-		AttackedStop = false;
+        StartAgent();
 	}
 
 	IEnumerator Knockback()
@@ -210,7 +222,7 @@ public class BasicEnemyBehavior : MonoBehaviour {
 		KnockedBack = true;
 		yield return new WaitForSeconds (KnockbackForwardStop);
 		KnockedBack = false;
-		AttackedStop = false;
+        StartAgent();
 	}
 
 	IEnumerator ShakeLeftRight()

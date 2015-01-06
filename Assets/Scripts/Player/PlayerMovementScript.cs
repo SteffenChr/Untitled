@@ -6,16 +6,15 @@ public class PlayerMovementScript : MonoBehaviour
 	private bool CanMove = true;
 	//private float PrivateFloatSpeed;
 	private float YPosition;
-
+	
 	public float Speed = 5.0F;
 	public float FloatUpSpeed = 2.0F;
 	public float FloatDuration = 2.0F;
-	public float Division = 2.0F;
+	public float Division = 0.5F; //This is a procentage which defines how fast it should move diagonaly compared to normal speed
 
 	// Use this for initialization
 	void Start () 
 	{
-		YPosition = transform.position.y;
 	}
 	
 	// Update is called once per frame
@@ -46,76 +45,38 @@ public class PlayerMovementScript : MonoBehaviour
 		else
 		{
 			CanMove = true;
-		}
-
-		if(CanMove == true){
-			if(Input.GetKey("d") && Input.GetKey("w"))
-			{
-				transform.forward = new Vector3(1,0,1);
-				RunDiagonal();
-			}
-			else if (Input.GetKey("w") && Input.GetKey("a"))
-			{
-				transform.forward = new Vector3(-1,0,1);
-				RunDiagonal();
-			}
-			else if (Input.GetKey("a") && Input.GetKey("s"))
-			{
-				transform.forward = new Vector3(-1,0,-1);
-				RunDiagonal();
-			}
-			else if (Input.GetKey("s") && Input.GetKey("d"))
-			{
-				transform.forward = new Vector3(1,0,-1);
-				RunDiagonal();
-			}
-			else if (Input.GetKey("w"))
-			{
-				transform.forward = Vector3.forward;
-				RunStrait();
-			}
-			else if (Input.GetKey("s"))
-			{
-				transform.forward = Vector3.back;
-				RunStrait();
-			}
-			else if (Input.GetKey("a"))
-			{
-				transform.forward = Vector3.left;
-				RunStrait();
-			}
-			else if (Input.GetKey("d"))
-			{
-				transform.forward = Vector3.right;
-				RunStrait();
-			}
-		}
-
-		//making sure you don't get double speed while moving diagonally
-	
+		}	
 
 		if(AttackPoint.PlayerAttack03Float == true)
 		{
-			//PrivateFloatSpeed = FloatUpSpeed;
+            //PrivateFloatSpeed = FloatUpSpeed;
+            YPosition = transform.position.y;
+            this.rigidbody.useGravity = false;
 			transform.Translate(Vector3.up * FloatUpSpeed);
 			StartCoroutine(Floating());
 		}
 	}
 
-	void RunStrait ()
+	public void RunStrait(Vector3 direction)
 	{
-		transform.Translate(Vector3.forward * Speed);
+		if(CanMove){
+			transform.forward = direction;
+			transform.Translate(Vector3.forward * Speed);
+		}
 	}
 
-	void RunDiagonal ()
+	public void RunDiagonal(Vector3 direction)
 	{
-		transform.Translate(Vector3.forward * (Speed/Division));
+		if(CanMove){
+			transform.forward = direction;
+			transform.Translate(Vector3.forward * (Speed*Division));
+		}
 	}
 
 	IEnumerator Floating()
 	{
 		yield return new WaitForSeconds (FloatDuration);
-		//PrivateFloatSpeed = 0;
 		transform.position = new Vector3(transform.position.x,YPosition,transform.position.z);
+        this.rigidbody.useGravity = true;
 	}
 }
