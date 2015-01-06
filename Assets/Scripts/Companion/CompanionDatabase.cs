@@ -17,20 +17,20 @@ public class CompanionDatabase : MonoBehaviour
     /// This methode saves the companion to the designated spot.
     /// </summary>
     /// <param name="companion">The companion class needed to be saved</param>
-    /// <param name="companionSpot">The position the companion can be saved in 1=left, 2=right</param>
+    /// <param name="companionSpot">The position the companion can be saved in</param>
     internal void SetCompanion(Companion companion, int companionSpot)
     {
-        companions.Insert(companionSpot - 1, companion);
+        companions.Insert(companionSpot, companion);
     }
 
     /// <summary>
     /// This methode returns the companion in the spot which is designated by the attribute.
     /// </summary>
-    /// <param name="companionNumber">The number spot of the companion 1=left, 2=right</param>
+    /// <param name="companionNumber">The number spot of the companion</param>
     /// <returns>The companion class</returns>
     internal Companion GetCompanion(int companionSpot)
     {
-        return companions[companionSpot - 1];
+        return companions[companionSpot];
     }
 
     /// <summary>
@@ -44,10 +44,10 @@ public class CompanionDatabase : MonoBehaviour
     /// <summary>
     /// Deletes the companion stored in this specific spot
     /// </summary>
-    /// <param name="companionSpot">The spot of the companion 1=left, 2=right</param>
+    /// <param name="companionSpot">The spot of the companion</param>
     internal void DeleteCompanion(int companionSpot)
     {
-        companions.RemoveAt(companionSpot - 1);
+        companions.RemoveAt(companionSpot);
     }
 
     /// <summary>

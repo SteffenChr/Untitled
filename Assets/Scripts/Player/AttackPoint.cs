@@ -3,13 +3,13 @@ using System.Collections;
 
 public class AttackPoint : MonoBehaviour {
 
-	private bool PlayerAttack01Activated = false;
-	private bool PlayerAttack02Activated = true;
-	private bool PlayerAttack03Activated = true;
-	private bool CanMove = true;
-	private float YPosition;
+    private bool PlayerAttack01Activated = false;
+    private bool PlayerAttack02Activated = true;
+    private bool PlayerAttack03Activated = true;
+    private bool CanMove = true;
+    private float YPosition;
+    private int TimeStamp;
 
-	private int TimeStamp;
 	public Transform PlayerPosition;
 	public Transform PlayerAttack01;
 	public Transform PlayerAttack02;
@@ -27,7 +27,7 @@ public class AttackPoint : MonoBehaviour {
 	public float FloatUpSpeed = 2.0F;
 	public float FloatDuration = 2.0F;
 
-	public static bool PlayerAttackDestoy = false;
+    public static bool PlayerAttackDestoy = false;
 	public static bool PlayerAttack01Immobalize = false;
 	public static bool PlayerAttack02Immobalize = false;
 	public static bool PlayerAttack03Immobalize = false;
@@ -52,12 +52,6 @@ public class AttackPoint : MonoBehaviour {
 		{
             YPosition = GameObject.FindGameObjectWithTag("Player").transform.position.y - 0.2F;
 			CanMove = true;
-		}
-
-		//time between attacks before combo resets
-		if(Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			StartCoroutine(Combo(ComboTime));
 		}
 
 		if(PlayerAttack03Float == true)
@@ -171,4 +165,9 @@ public class AttackPoint : MonoBehaviour {
 		PlayerAttack03Immobalize = false;
 		PlayerAttack01Activated = false;
 	}
+
+    internal void PlayerAttacks(int attackNumber)
+    {
+        throw new System.NotImplementedException();
+    }
 }

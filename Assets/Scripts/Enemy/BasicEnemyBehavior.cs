@@ -116,25 +116,25 @@ public class BasicEnemyBehavior : MonoBehaviour {
 	//triggers to determine what happens when colliding with other objects
 	void OnTriggerEnter(Collider collider)
 	{
-		if(collider.CompareTag("PlayerAttack01"))
+		if(collider.name.Equals("PlayerAttack01(Clone)"))
 		{
 			StartCoroutine(AttackedStopForward());
 			StartCoroutine(ShakeLeftRight());
 		}
-		
-		if(collider.CompareTag("PlayerAttack02"))
+
+        if (collider.name.Equals("PlayerAttack02(Clone)"))
 		{
 			StartCoroutine(AttackedStopForward());
 			StartCoroutine(ShakeLeftRight());
 		}
-		
-		if(collider.CompareTag("PlayerAttack03"))
+
+        if (collider.name.Equals("PlayerAttack03(Clone)"))
 		{
 			StartCoroutine (FloatingAttackedStopForward());
 			FloatAttacked = true;
 		}
 
-		if(collider.CompareTag("PlayerAttack04"))
+        if (collider.name.Equals("PlayerAttack04(Clone)"))
 		{
 			FloatingYPosition = transform.position.y;
 			StartCoroutine(Knockback());

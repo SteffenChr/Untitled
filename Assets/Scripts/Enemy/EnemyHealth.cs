@@ -21,9 +21,9 @@ public class EnemyHealth : MonoBehaviour {
     /// <param name="collider"></param>
 	void OnTriggerEnter(Collider collider)
 	{
-		if(collider.CompareTag("DealEnemyDamage"))
+		if(collider.CompareTag("PlayerAttack"))
 		{
-            Health = Health - collider.GetComponent<DamageDealing>().damageDealing;
+            Health = Health - collider.GetComponent<AttackObjectScript>().DamageDealing;
 		}
 	}
 }
