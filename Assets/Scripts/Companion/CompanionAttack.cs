@@ -5,13 +5,14 @@ public class CompanionAttack : MonoBehaviour {
 
     public float damageDealing; //The damage the attack inflicts on the enemy
     public float attackCooldown; //The cooldown before the attack can be used again
-    public Transform attackTransform; //The transform used in the attack
+    public GameObject attackTransform; //The transform used in the attack
     public float cooldownTimeUntilNextAttack; //The length of the animation
     public int attackNumber; //The number of the attack in the combo
+    public float attackActiveTime; //The time the created transform is active
 
     private bool isAttackUsable = true;
     private GameObject attackPoint;
-    private Object instantiatedAttackObject;
+    private GameObject instantiatedAttackObject;
 
     void Start()
     {
@@ -28,7 +29,10 @@ public class CompanionAttack : MonoBehaviour {
     /// </summary>
     public void InstantiateAttack()
     {
-        instantiatedAttackObject = Instantiate(attackTransform, attackPoint.transform.position, attackPoint.transform.rotation);
+        instantiatedAttackObject = GameObject.Instantiate(attackTransform, attackPoint.transform.position, attackPoint.transform.rotation) as GameObject;
+        AttackObjectScript script = instantiatedAttackObject.GetComponent<AttackObjectScript>();
+        script.DamageDealing = damageDealing;
+        script.StartDestroyObejctSequence(attackActiveTime);
     }
 
     private void CooldownAttack(float attackCooldown)

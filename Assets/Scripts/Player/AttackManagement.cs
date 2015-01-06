@@ -8,6 +8,8 @@ public class AttackManagement : MonoBehaviour {
     private GameObject[] activeCompanions;
 
     private int attackNumber = 1; //1=first attack 2=second attack 3=third attack
+    private bool leftCompanionAtcive = false;
+    private bool rightCompanionActive = false;
 
     public float ComboTime = 1.0F;
 
@@ -18,7 +20,7 @@ public class AttackManagement : MonoBehaviour {
         GameObject scripts = GameObject.FindGameObjectWithTag("Scripts");
         companionDB = scripts.GetComponent<CompanionDatabase>();
         GetCompanions();
-        FillEmptyCompanionSpots();
+        SetCompanionsUsable();
 	}
 
     /// <summary>
@@ -36,7 +38,7 @@ public class AttackManagement : MonoBehaviour {
     /// </summary>
     internal void CompanionLeftAttack()
     {
-        if (activeCompanions[(int)CompanionPosition.Left] != null)
+        if (leftCompanionAtcive)
         {
             StartCombo();
             activeCompanions[(int)CompanionPosition.Left].SendMessage("Attack",attackNumber);
@@ -49,7 +51,7 @@ public class AttackManagement : MonoBehaviour {
     /// </summary>
     internal void CompanionRightAttack()
     {
-        if (activeCompanions[(int)CompanionPosition.Right] != null)
+        if (rightCompanionActive) 
         {
             StartCombo();
             activeCompanions[(int)CompanionPosition.Right].SendMessage("Attack",attackNumber);
@@ -95,7 +97,7 @@ public class AttackManagement : MonoBehaviour {
     /// <summary>
     /// Sets the companion to eiher left or right, depending on the position
     /// </summary>
-    /// <param name="position">the position of the companion. 1=left, 2=right</param>
+    /// <param name="position">the position of the companion.</param>
     private void GetCompanion(CompanionPosition position)
     {
         Companion companion = companionDB.GetCompanion((int)position);
@@ -113,13 +115,14 @@ public class AttackManagement : MonoBehaviour {
     }
 
     /// <summary>
-    /// Used to see if positions in the activeCompanions list is empty
+    /// Used to see if positions in the activeCompanions list is empty, the activeCompanions array can only be 2 big
+    /// Therefore we use the CompanionPosition to see if the spot in the array is empty
     /// </summary>
-    /// <param name="companionPosition">The companion spot that needs to tjecked 1=left, 2=right</param>
+    /// <param name="companionPosition">The companion spot that needs to tjecked </param>
     /// <returns>True == null | False != null</returns>
     private bool isCompanionSpotEmpty(CompanionPosition companionPosition)
-    {        
-        if (activeCompanions[(int)companionPosition] == null)
+    {
+        if (activeCompanions.Length != (int)companionPosition+1)
             return true;
         else
             return false;
@@ -150,5 +153,23 @@ public class AttackManagement : MonoBehaviour {
     private void ResetAttackNumber()
     {
         attackNumber = 1;
+    }
+
+    /// <summary>
+    /// looks in the array of companions to see how many is saved,
+    /// from that makes sure the player can use left and/or right companion
+    /// </summary>
+    private void SetCompanionsUsable()
+    {
+        int lenghtOfArray = activeCompanions.Length;
+        if (lenghtOfArray == 1)
+        {
+            leftCompanionAtcive = true;
+        }
+        else if (lenghtOfArray == 2)
+        {
+            leftCompanionAtcive = true;
+            rightCompanionActive = true;
+        }
     }
 }

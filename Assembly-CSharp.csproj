@@ -64,9 +64,9 @@
      <Compile Include="Assets\Scripts\Enemy\SpawnEnemies.cs" />
      <Compile Include="Assets\Scripts\GUI\PlayerGUI.cs" />
      <Compile Include="Assets\Scripts\Interfaces\Interface.cs" />
+     <Compile Include="Assets\Scripts\Miscellaneous\AttackObjectScript.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\DamageDealing.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\Enumscript.cs" />
-     <Compile Include="Assets\Scripts\Player\AttackDestroy.cs" />
      <Compile Include="Assets\Scripts\Player\AttackManagement.cs" />
      <Compile Include="Assets\Scripts\Player\AttackPoint.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />

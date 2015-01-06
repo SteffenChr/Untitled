@@ -10,11 +10,11 @@ public class PlayerAttack : MonoBehaviour {
     private float YPosition;
     private int TimeStamp;
 
-    public Transform PlayerPosition;
-    public Transform PlayerAttack01;
-    public Transform PlayerAttack02;
-    public Transform PlayerAttack03;
-    public Transform PlayerAttack04;
+    public Transform AttackPoint;
+    public GameObject PlayerAttack01;
+    public GameObject PlayerAttack02;
+    public GameObject PlayerAttack03;
+    public GameObject PlayerAttack04;
     public float PlayerAttack01Cooldown = 2.0F;
     public float PlayerAttack02Cooldown = 2.0F;
     public float PlayerAttack03Cooldown = 2.0F;
@@ -65,17 +65,16 @@ public class PlayerAttack : MonoBehaviour {
         if (!PlayerAttack01Activated && attackNumber.Equals(1))
         {
             PlayerAttackDestoy = false;
-            Instantiate(PlayerAttack01, transform.position, transform.rotation);
+            CreateAttackTransform(PlayerAttack01, PlayerAttack01Cooldown);
             PlayerAttack01Activated = true;
             PlayerAttack01Immobalize = true;
             StartCoroutine(CooldownPlayerAttack01());
-
         }
 
         if (!PlayerAttack02Activated && attackNumber.Equals(2))
         {
             PlayerAttackDestoy = false;
-            Instantiate(PlayerAttack02, transform.position, transform.rotation);
+            CreateAttackTransform(PlayerAttack02, PlayerAttack02Cooldown);
             PlayerAttack02Activated = true;
             PlayerAttack02Immobalize = true;
             StartCoroutine(CooldownPlayerAttack02());
@@ -84,12 +83,18 @@ public class PlayerAttack : MonoBehaviour {
         if (!PlayerAttack03Activated && attackNumber.Equals(3))
         {
             PlayerAttackDestoy = false;
-            Instantiate(PlayerAttack03, transform.position, transform.rotation);
+            CreateAttackTransform(PlayerAttack03, PlayerAttack03Cooldown);
             PlayerAttack03Activated = true;
             PlayerAttack03Immobalize = true;
             PlayerAttack03Float = true;
             StartCoroutine(CooldownPlayerAttack03());
         }
+    }
+
+    private void CreateAttackTransform(GameObject playerTransform, float attackActiveTime)
+    {
+        GameObject instantiatedAttackObject = GameObject.Instantiate(playerTransform, AttackPoint.transform.position, AttackPoint.transform.rotation) as GameObject;
+        instantiatedAttackObject.GetComponent<AttackObjectScript>().StartDestroyObejctSequence(attackActiveTime);
     }
 
     IEnumerator Floating()
@@ -121,7 +126,7 @@ public class PlayerAttack : MonoBehaviour {
 
     IEnumerator CooldownPlayerAttack04()
     {
-        Instantiate(PlayerAttack04, transform.position, transform.rotation);
+        CreateAttackTransform(PlayerAttack04, PlayerAttack04Cooldown);
         yield return new WaitForSeconds(PlayerAttack04Cooldown);
         PlayerAttackDestoy = true;
         PlayerAttack03Float = false;
