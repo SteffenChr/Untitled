@@ -41,7 +41,7 @@ public class SpawnEnemies : MonoBehaviour {
     /// <param name="SpawnTime">The cooldown until next spawn</param>
 	IEnumerator Spawn(float SpawnTime)
 	{        
-		GameObject enemy = Instantiate (BasicEnemy, transform.position, transform.rotation) as GameObject;
+		GameObject enemy = GameObject.Instantiate (BasicEnemy, transform.position, transform.rotation) as GameObject;
         Transform parent = GameObject.FindGameObjectWithTag("EnemyHolder").transform;
         enemy.transform.SetParent(parent, true);
 		Spawned = true;
