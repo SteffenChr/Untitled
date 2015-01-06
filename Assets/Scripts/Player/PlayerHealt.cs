@@ -37,7 +37,6 @@ public class PlayerHealt : MonoBehaviour
     /// <param name="coll"></param>
     void OnCollisionEnter(Collision coll)
     {
-        print("Touch player");
         if (coll.transform.CompareTag("Enemy"))
         {
             int enemyDamage = coll.gameObject.GetComponent<Enemy>().damageDealing;
